@@ -29,6 +29,10 @@ project structure
 
 When your partner pulls your latest commit from GitHub, their venv won't automatically have the new library. They need to run:
     pip install -r requirements.txt
+notes namuna
+hjjhj
+jhjhjhjh
 
+testinh btuhjjgjh 
 
 testing
