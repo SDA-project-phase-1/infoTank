@@ -1,40 +1,45 @@
 import csv
 
+# return a float -> exception handling huwi ha 
 def floatConversionCheck(value):
     try:
         return float(value)
     except (ValueError, TypeError):
         return None
 
+# return a int -> exception handling huwi ha 
 def intConversionCheck(value):
     try:
         return int(value)
     except (ValueError, TypeError):
         return None
 
+# takes a row from csv file 
 def rowToDictionaryTransformation(row):
+    # if a column is missing then return None
     if len(row) < 4:
         return None
 
+    # strip will remove leading and aga wali spacesy
     country, region, year, gdp = (i.strip() for i in row)
 
     year = intConversionCheck(year)
     gdp = floatConversionCheck(gdp)
 
-    if not country or not region or year is None or gdp is None:
-        return None
-
     return {"country": country, "region": region, "year": year, "gdp": gdp}
 
 def loadingRows(csvFile):
+    #with handles the close responsiblity , r means read mode , f is file name
     with open(csvFile, "r") as f:
+        # it return a list  
         reader = csv.reader(f)
-        return list(reader)
+        return list(reader) 
 
 csvFileRawData = loadingRows("records.csv")
-
+print(csvFileRawData)
+print("\n")
 filteredRows = list(
-    filter(None, map(rowToDictionaryTransformation, csvFileRawData))
+    filter(None, map(rowToDictionaryTransformation, csvFileRawData)) # filter mai None remove ho raha aur maping ho rahi function ki
 )
 
 regionOnly = input("Enter region to filter: ").strip().lower()
