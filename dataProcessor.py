@@ -1,6 +1,5 @@
 import pandas as pd
 
-#qurrat pandey ka code
 def to_long_format(df):
     id_vars = ["Country_Name", "Country_Code", "Indicator_Name", "Indicator_Code", "Continent"]
     year_cols = [c for c in df.columns if str(c).isdigit()]

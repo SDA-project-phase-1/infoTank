@@ -2,7 +2,7 @@
   "filters": {
     "region": "Asia",
     "year": 2020,
-    "country": null
+    "country": "Pakistan"
   },
   "operation": "average",
   "output": "dashboard"

@@ -3,13 +3,14 @@ import dataLoader
 import dataProcessor 
 from configReader import load_config, validate_config
 import visualization as viz
+import dashboard as db
 
 def main():
     try:
         #*config.json file load or validate hoti
         cfg = validate_config(load_config("config.json"))
         print("Config loaded:")
-        print(cfg)
+        # print(cfg)
 
         #*sir wali file load hoti
         df = dataLoader.load_csv("gdp_with_continent_filled.csv")
@@ -19,18 +20,7 @@ def main():
         long_df = dataProcessor.clean_long_data(long_df)
 
         filtered_df = dataProcessor.filter_by_config(long_df, cfg)
-        result = dataProcessor.compute_stat(filtered_df, cfg)
-
-        print("\n\tDASHBOARD")
-        print("Filters:", cfg["filters"])
-        print("Operation:", cfg["operation"])
-
-        if result is None:
-            print("Result: No data found for the given filters.")
-            return
-
-        print("Result:", result)
-
+        db.dashboard(filtered_df, cfg)
         #graph plots
         #data  ko process karna ha 
         # regions ki basis pa filter karna ha 
@@ -45,19 +35,24 @@ def main():
         elif cfg["operation"] == "average":
             first_year_filter = countries_in_that_region.groupby("Year")["Value"].mean().reset_index()
        
-        print(first_year_filter)
-       # viz.plot_year_line(first_year_filter, cfg)
-        # viz.plot_year_bar(first_year_filter, cfg)
-        print(long_df)
+        # print(first_year_filter)
+        viz.plot_year_line(first_year_filter, cfg)
+        viz.plot_year_bar(first_year_filter, cfg)
+        # print(long_df)
+
+        #after groupby continent becomes a index so we have to remove the index and turn it into its actual value
         if cfg["operation"] == "sum":
             sec_reg_filter = long_df.groupby("Continent")["Value"].sum().reset_index()
         elif cfg["operation"] == "average":
             sec_reg_filter = long_df.groupby("Continent")["Value"].mean().reset_index()
         
         viz.plot_reg_voil(sec_reg_filter, cfg)
+        #removing global continent take sahi graph aye
+        sec_reg_filter = sec_reg_filter[
+            sec_reg_filter["Continent"] != "Global"
+        ]
         viz.plot_reg_pie(sec_reg_filter, cfg)
 
-    #exceptions hain ye qurrat pandey
     except FileNotFoundError as e:
         print("File not found:", e)
     except ValueError as e:

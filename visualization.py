@@ -27,8 +27,6 @@ def plot_year_bar(df, cfg):
         palette="tab20" 
        # color="skyblue"
     )
-    years = df["Year"]
-    values = df["Value"]
 
     plt.xticks(rotation=90)  # rotate x-axis labels for readability
     plt.title(f"{cfg['operation'].capitalize()} GDP of {cfg["filters"].get("region")}  by Year (1960-2024)")
@@ -40,7 +38,6 @@ def plot_year_bar(df, cfg):
     plt.show()
 
 def plot_reg_voil(df, cfg):
-
     plt.figure(figsize=(20, 6))
 
     # Violin plot
@@ -48,7 +45,7 @@ def plot_reg_voil(df, cfg):
         # x = df['Continent'],
         y=df["Value"],
         data=df,
-        palette="viridis",   # nice gradient colors
+        palette="viridis",  
         inner="quartile"     # shows median and quartiles inside the violin
     )
 
@@ -57,12 +54,12 @@ def plot_reg_voil(df, cfg):
     # x="Continent",
      y=df["Value"],
     data=df,
-    color="k",       # black points
-    size=3,          # make points small
+    color="k",      #black dots
+    size=3,          # so points small
     alpha=0.6
 )
 
-    plt.xlabel("")  # no x-axis needed since countries are not individually shown
+    plt.xlabel("")  
     plt.ylabel(f"{cfg['operation'].capitalize()} GDP")
     plt.title(f"Distribution of {cfg['operation'].capitalize()} GDP in {cfg["filters"].get("region")} Countries")
     plt.grid(axis='y', alpha=0.5)
