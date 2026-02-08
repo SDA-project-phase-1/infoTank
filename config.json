@@ -1,6 +1,9 @@
 {
-  "region": "South Asia",
-  "year": 2020,
+  "filters": {
+    "region": "Asia",
+    "year": 2020,
+    "country": null
+  },
   "operation": "average",
   "output": "dashboard"
 }

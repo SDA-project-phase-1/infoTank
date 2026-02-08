@@ -6,12 +6,10 @@ import visualization as viz
 
 def main():
     try:
-        #config.json file load or validate hoti
         cfg = validate_config(load_config("config.json"))
         print("Config loaded:")
         print(cfg)
 
-        #sir wali file load hoti
         df = load_csv("gdp_with_continent_filled.csv")
 
         long_df = to_long_format(df)
@@ -20,7 +18,7 @@ def main():
         filtered_df = filter_by_config(long_df, cfg)
         result = compute_stat(filtered_df, cfg)
 
-        print("\n\tDASHBOARD")
+        print("\n====== DASHBOARD ======")
         print("Filters:", cfg["filters"])
         print("Operation:", cfg["operation"])
 
@@ -30,17 +28,18 @@ def main():
 
         print("Result:", result)
 
-        #graph plots
+        # Charts
+        # Region-wise charts (these are more meaningful if you DON'T filter region too narrowly)
         viz.plot_region_bar(filtered_df)
         viz.plot_region_pie(filtered_df)
 
+        # Year-specific charts
         country = cfg["filters"].get("country")
         if country:
             viz.plot_year_line(long_df, country_name=country)
 
         viz.plot_year_histogram(filtered_df)
 
-    #exceptions hain ye qurrat pandey
     except FileNotFoundError as e:
         print("File not found:", e)
     except ValueError as e:
