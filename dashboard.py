@@ -32,7 +32,7 @@ def dashboard(long_data, config):
 
     filtered = list(
             filter(lambda r:
-                r["Country_Name"] == country,
+                r["Country_Name"] == country and r["Year"] == year,
                 records
             )
         )

@@ -22,7 +22,7 @@ def clean_long_data(long_df):
 
     long_df["Value"] = (
         long_df
-        .groupby("Continent")["Value"]
+        .groupby("Country_Name")["Value"]
         .transform(lambda x: x.fillna(x.mean()))
     )
 
@@ -52,17 +52,17 @@ def filter_by_config(long_df, cfg):
 
     return df
 
-def compute_stat(filtered_df, cfg):
-    op = cfg["operation"]
+# def compute_stat(filtered_df, cfg):
+#     op = cfg["operation"]
 
-    if filtered_df.empty:
-        return None
+#     if filtered_df.empty:
+#         return None
 
-    values = filtered_df["Value"]
+#     values = filtered_df["Value"]
 
-    if op == "average":
-        return float(values.mean())
-    elif op == "sum":
-        return float(values.sum())
+#     if op == "average":
+#         return float(values.mean())
+#     elif op == "sum":
+#         return float(values.sum())
 
-    raise ValueError("Unsupported operation in config.")
+#     raise ValueError("Unsupported operation in config.")

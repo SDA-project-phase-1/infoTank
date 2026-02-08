@@ -20,7 +20,7 @@ def main():
         long_df = dataProcessor.clean_long_data(long_df)
 
         filtered_df = dataProcessor.filter_by_config(long_df, cfg)
-        db.dashboard(filtered_df, cfg)
+        db.dashboard(long_df, cfg)
         #graph plots
         #data  ko process karna ha 
         # regions ki basis pa filter karna ha 
