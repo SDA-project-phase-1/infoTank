@@ -4,3 +4,4 @@ import visualization
 
 data = dataLoader.load_data("gdp_with_continent_filled.csv")
 data = dataProcessor.cleaning_data(data)
+visualization.bar_chart(data,2020)
