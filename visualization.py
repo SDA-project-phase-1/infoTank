@@ -39,7 +39,7 @@ def plot_year_bar(df, cfg):
     plt.tight_layout()
     plt.show()
 
-def plot_reg_histogram(df, cfg):
+def plot_reg_voil(df, cfg):
 
     plt.figure(figsize=(20, 6))
 

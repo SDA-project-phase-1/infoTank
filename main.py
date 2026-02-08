@@ -54,7 +54,7 @@ def main():
         elif cfg["operation"] == "average":
             sec_reg_filter = long_df.groupby("Continent")["Value"].mean().reset_index()
         
-        viz.plot_reg_histogram(sec_reg_filter, cfg)
+        viz.plot_reg_voil(sec_reg_filter, cfg)
         viz.plot_reg_pie(sec_reg_filter, cfg)
 
     #exceptions hain ye qurrat pandey
